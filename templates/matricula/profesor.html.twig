@@ -1,0 +1,123 @@
+{% extends 'base_admin.html.twig' %}
+{% block title %}Matrícula{% endblock %}
+{% block body %}
+
+{{ form_start(form, {'attr': {'id': 'form_matricula'}}) }}
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Formulario de Matricula</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4">{{ form_row(form.curso) }}</div>
+            <div class="col-4">{{ form_row(form.nombres) }}</div>
+            <div class="col-4">{{ form_row(form.apellidos) }}</div>
+            <div class="col-4">{{ form_row(form.rut) }}</div>
+            <div class="col-4">{{ form_row(form.matriculaCompletada) }}</div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success">Buscar</button>
+        <a class="btn btn-primary" href="{{ path('matricula_profesor_nueva_ficha') }}">Nueva Matricula</a>
+    </div>
+</div>
+{{ form_end(form) }}
+
+{% if busqueda %}
+    {% if lista %}
+    <div class="card mt-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <a class="btn btn-primary" href="{{ path('matricula_profesor_excel') }}">Exportar a Excel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <th></th>
+            <th>Apoderado</th>
+            <th>Estudiante</th>
+            <th>RUN</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+            <th>Nombres</th>
+            <th>Curso</th>
+            <th>Apoderado</th>
+            <th>Teléfono</th>
+            <th>Correo Electrónico</th>
+            <th>Descargar Ficha</th>
+            <th>Modificar Ficha</th>
+            <th>Matricula Completada</th>
+        </thead>
+        <tbody>
+            {% set i = 0 %}
+            {% for item in lista  %}
+                {% set i = i + 1 %}
+                <tr>
+                    <td>{{ i }}</td>
+                    <td>
+                    {% if item.fotoApoderado %}
+                    <img src="{{ vich_uploader_asset(item, 'fotoApoderadoFile') | imagine_filter('mini') }}?20211210" />
+                    {% endif %}
+                    </td>
+                    <td>
+                    {% if item.fotoEstudiante %}
+                    <img src="{{ vich_uploader_asset(item, 'fotoEstudianteFile') | imagine_filter('mini') }}?20211210" />
+                    {% endif %}
+                    </td>
+                    <td>{{ item.rut|upper }}</td>
+                    <td>{{ item.apellidoPaterno|upper }}</td>
+                    <td>{{ item.apellidoMaterno|upper }}</td>
+                    <td>{{ item.nombres|upper }}</td>
+                    <td>{{ item.curso|upper }}</td>
+                    <td>{{ item.apoderadoNombre|upper }}</td>
+                    <td>{{ item.apoderadoTelefono|upper }}</td>
+                    <td>{{ item.apoderadoCorreoElectronico }}</td>
+                    <td>
+                    {% if item.pdf %}
+                    <a href="{{ asset("pdf/" ~ item.pdf) }}" class="btn btn-primary" target="_new">Descargar PDF</a>
+                    {% endif %}
+                    </td>
+                    <td>
+                    {% if item.matriculaCompletada == false %}
+                    <a class="btn btn-primary" href="{{ path('matricula_profesor_modificar_ficha',{'id':item.id}) }}">Modificar</a>
+                    {% endif %}
+                    </td>
+                    <td>
+                    {% if item.matriculaCompletada == false %}
+                        <a class="btn btn-primary" href="{{ path('matricula_profesor_matricula_completada',{'id':item.id}) }}" onclick="return confirm('¿El apoderado completó toda la documentación?')">Matricula Completada</a></td>
+                    {% else %}
+                        {{ item.matriculaFecha ? item.matriculaFecha|date('d-m-Y H:i:s') }}
+                    {% endif %}
+                    </td>
+                    <td>
+                    <a class="btn btn-danger" href="{{ path('matricula_profesor_eliminar',{'id':item.id}) }}">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        No hay datos.
+    {% endif %}
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $('#form_matricula').submit(function() {
+        var rut = $('.input-rut').val();
+        if(rut != '')
+        {
+            if(!$.validateRut(rut, null, { minimumLength: 4 })) {
+                alert("El rut ingresado no es válido!");
+                return false;
+            }
+        }
+        return true;
+    });
+</script>
+{% endblock %}            

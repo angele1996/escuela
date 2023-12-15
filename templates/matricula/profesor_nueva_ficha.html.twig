@@ -1,0 +1,35 @@
+{% extends 'base_admin.html.twig' %}
+{% block title %}Matrícula{% endblock %}
+{% block body %}
+
+{{ form_start(form, {'attr': {'id': 'form_matricula'}}) }}
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Formulario de Matricula</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">{{ form_row(form.rut) }}</div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success">Continuar</button>
+        <a class="btn btn-warning" href="{{ path('matricula_profesor') }}">Cancelar</a>
+    </div>
+</div>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $('#form_matricula').submit(function() {
+        var rut = $('.input-rut').val();
+        if(!$.validateRut(rut, null, { minimumLength: 4 })) {
+            alert("El rut ingresado no es válido!");
+            return false;
+        }
+        return true;
+    });
+</script>
+{% endblock %}            

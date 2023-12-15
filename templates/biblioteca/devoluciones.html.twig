@@ -1,0 +1,108 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Devoluciones{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-6">
+        {{ form_start(form) }}
+            <div class="card">
+                <div class="card-header">
+                    <h2>Devoluciones</h2>
+                </div>
+                <div class="card-body">
+                    <span class="help-block">{{ form_errors(form) }}</span>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                {{ form_label(form.codigo) }}
+                                {{ form_widget(form.codigo, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.codigo) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Devolver</button>
+                    <a href="{{ path('biblioteca') }}" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancelar</a>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+
+    {% if ejemplar %}
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Ejemplar Devuelto</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                Codigo
+                                <b>{{ ejemplar.codigo|default('')|upper }}</b>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                Nombre
+                                <b>{{ ejemplar.libro.nombre|default('')|upper }}</b>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                Autor
+                                {% for item_autor in ejemplar.libro.autors %}
+                                    <b>{{ item_autor|default('')|upper }}</b><br/>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                Editorial
+                                <b>{{ ejemplar.libro.editorial|default('')|upper }}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Préstamos Vigentes</h2>
+                </div>
+                <div class="card-body">
+                    
+                    <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Fecha de Préstamo</th>
+                                <th>Fecha de Devolución</th>
+                            </tr>   
+                        </thead>
+                        <tbody>
+                        {% set i = 0  %}
+                        {% for prestamo in lista %}
+                            {% set  i = i + 1  %}
+                            <tr>
+                                <td>{{ i }}</td>
+                                <td>{{ prestamo.fechaPrestamo ? prestamo.fechaPrestamo|date('d-m-Y') }}</td>
+                                <td>{{ prestamo.fechaDevolucion ? prestamo.fechaDevolucion|date('d-m-Y') }}</td>
+                            </tr>
+                        {% endfor %}
+                        {% if i == 0 %}
+                            <tr><td colspan="3">No hay datos.</td></tr>
+                        {% endif %} 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

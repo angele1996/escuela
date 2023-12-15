@@ -1,0 +1,211 @@
+{% extends 'base_admin.html.twig' %}
+{% block title %}Matrícula{% endblock %}
+{% block body %}
+
+<h1>Formulario de Matrícula</h1>
+{{ form_start(form, {'attr': {'id': 'form_matricula'}}) }}
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Datos del Estudiante</h3>
+    </div>
+    <div class="card-body">
+        <div class="my-custom-class-for-errors">
+            {{ form_errors(form) }}
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-4">
+                {{ form_row(form.rut) }}
+            </div>
+            <div class="col-6 col-md-4">
+                {{ form_row(form.curso) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-4">{{ form_row(form.apellidoPaterno) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apellidoMaterno) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.nombres) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.fechaNacimiento) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.ciudadNacimiento) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.nacionalidad) }}</div>
+            <div class="col-12 col-md-8">{{ form_row(form.domicilio) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.comuna) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.genero) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.telefono) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.correoElectronico) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4"><b>Teléfonos de contacto y/o  urgencias</b></div>
+            <div class="col-12 col-md-8">
+                <div class="row">
+                    <div class="col-4"><label>Nombre</label></div>
+                    <div class="col-4"><label>Parentesco</label></div>
+                    <div class="col-4"><label>Número</label></div>
+                </div>
+                <div class="row">
+                    <div class="col-4">{{ form_widget(form.nombreTelefonoContacto1) }}</div>
+                    <div class="col-4">{{ form_widget(form.parentescoTelefonoContacto1) }}</div>
+                    <div class="col-4">{{ form_widget(form.numeroTelefonoContacto1) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-4">{{ form_widget(form.nombreTelefonoContacto2) }}</div>
+                    <div class="col-4">{{ form_widget(form.parentescoTelefonoContacto2) }}</div>
+                    <div class="col-4">{{ form_widget(form.numeroTelefonoContacto2) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-4">{{ form_widget(form.nombreTelefonoContacto3) }}</div>
+                    <div class="col-4">{{ form_widget(form.parentescoTelefonoContacto3) }}</div>
+                    <div class="col-4">{{ form_widget(form.numeroTelefonoContacto3) }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4">{{ form_row(form.conQuienVive) }}</div>
+            <div class="col-12 col-md-4">{{ form_row(form.colegioProcedencia) }}</div>
+            <div class="col-12 col-md-4">{{ form_row(form.repiteCurso) }}</div>
+            <div class="col-12 col-md-4">{{ form_row(form.necesidadesEducativasEspeciales) }}</div>
+            <div class="col-12 col-md-4">{{ form_row(form.necesidadesEducativasEspecialesCual) }}</div>
+        </div>
+    </div>
+</div>
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Datos del Padre</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6 col-md-4">{{ form_row(form.padreRut) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.padreNombre) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.padreTelefono) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.padreCorreoElectronico) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.padreNivelEducacional) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.padreDireccion) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.padreProfesion) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.padreLugarTrabajo) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.padreDireccionTrabajo) }}</div>
+        </div>
+    </div>
+</div>
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Datos de la Madre</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6 col-md-4">{{ form_row(form.madreRut) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.madreNombre) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.madreTelefono) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.madreCorreoElectronico) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.madreNivelEducacional) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.madreDireccion) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.madreProfesion) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.madreLugarTrabajo) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.madreDireccionTrabajo) }}</div>
+        </div>
+    </div>
+</div>
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Datos del Apoderado</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoParentesco) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoViveConEstudiante) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoRut) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoNombre) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoTelefono) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoCorreoElectronico) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoGenero) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoEstadoCivil) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoNivelEducacional) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoDireccion) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoProfesion) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoLugarTrabajo) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.apoderadoDireccionTrabajo) }}</div>
+        </div>
+    </div>
+</div>
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Datos Adicionales</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6 col-md-4">{{ form_row(form.padresProfesanReligion) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.padresSeleccionReligion) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.padresReligion) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-4">{{ form_row(form.quienRetiraParentesco) }}</div>
+            <div class="col-6 col-md-8">{{ form_row(form.quienRetiraNombre) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-12">{{ form_row(form.observaciones) }}</div>
+        </div>
+    </div>
+</div>
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Ficha Clínica</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6 col-md-4">{{ form_row(form.clinicaTieneSeguro) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.clinicaInstitucionSeguro) }}</div>
+            <div class="col-6 col-md-4">{{ form_row(form.clinicaTelefonoInstitucionSeguro) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-4">{{ form_row(form.clinicaTieneEnfermedadCuidadoEspecial) }}</div>
+            <div class="col-6 col-md-8">{{ form_row(form.clinicaEnfermedadCuidadoEspecial) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-12">{{ form_row(form.clinicaRecomendaciones) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-12">{{ form_row(form.clinicaObservaciones) }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Fotografía (tipo carnet)</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">{{ form_row(form.fotoApoderadoFile) }}</div>
+            <div class="col-6">{{ form_row(form.fotoEstudianteFile) }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a class="btn btn-warning" href="{{ path('matricula_profesor') }}">Cancelar</a>
+    </div>
+</div>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $('#form_matricula').disableAutoFill();
+
+    $('#form_matricula').submit(function() {
+        var rut = $('.input-rut').val();
+        if(rut != '')
+        {
+            if(!$.validateRut(rut, null, { minimumLength: 4 })) {
+                alert("El rut ingresado no es válido!");
+                return false;
+            }
+        }
+        return true;
+    });
+</script>
+{% endblock %}            

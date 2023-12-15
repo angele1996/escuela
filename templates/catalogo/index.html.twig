@@ -1,0 +1,109 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Catálogo{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Buscador</h3>
+            </div>
+            <div class="card-body">
+                <span class="help-block">{{ form_errors(form) }}</span>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {{ form_label(form.codigo_barra) }}
+                            {{ form_widget(form.codigo_barra, { 'attr': {'class': 'form-control'} }) }}
+                            <span class="invalid">{{ form_errors(form.codigo_barra) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {{ form_label(form.isbn) }}
+                            {{ form_widget(form.isbn, { 'attr': {'class': 'form-control'} }) }}
+                            <span class="invalid">{{ form_errors(form.isbn) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            {{ form_label(form.nombre_libro) }}
+                            {{ form_widget(form.nombre_libro, { 'attr': {'class': 'form-control'} }) }}
+                            <span class="invalid">{{ form_errors(form.nombre_libro) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            {{ form_label(form.nombre_autor) }}
+                            {{ form_widget(form.nombre_autor, { 'attr': {'class': 'form-control'} }) }}
+                            <span class="invalid">{{ form_errors(form.nombre_autor) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            {{ form_label(form.ubicacion) }}
+                            {{ form_widget(form.ubicacion, { 'attr': {'class': 'form-control'} }) }}
+                            <span class="invalid">{{ form_errors(form.ubicacion) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a href="{{ path('catalogo-menu') }}" class="btn btn-danger">Limpiar</a>
+                <a href="{{ path('catalogo-excel') }}" class="btn btn-success">Exportar a Excel</a>
+            </div>
+        </div>
+    {{ form_end(form) }}
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Lista de Libros</h3>
+        </div>
+        <div class="card-body">
+            {% if lista_libros|length > 0 %}
+                <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>ISBN</th>
+                            <th>Nombre</th>
+                            <th>Autor</th>
+                            <th>Editorial</th>
+                            <th>Cantidad</th>
+                        </tr>   
+                    </thead>
+                    <tbody>
+                    {% set i = 0  %}
+                    {% for item_libro in lista_libros %}
+                        {% set  i = i + 1  %}
+                        <tr>
+                            <td>{{ i }}</td>
+                            <td>
+                            {% if item_libro.image %}
+                            <img src="{{ vich_uploader_asset(item_libro, 'imageFile') | imagine_filter('mini') }}" />
+                            {% else %}
+                            <img src="{{ asset('images/avatar-book.png') }}" class="img-circle" width="40px" />
+                            {% endif %}
+                            </td>
+                            <td>{{ item_libro.isbn|default('')|upper }}</td>
+                            <td>{{ item_libro.nombre|default('')|upper }}</td>
+                            <td>
+                                {% for item_autor in item_libro.autors %}
+                                    {{ item_autor }}<br/>
+                                {% endfor %}
+                            </td>
+                            <td>{{ item_libro.editorial|default('')|upper }}</td>
+                            <td>{{ item_libro.ejemplars|length }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                No hay datos.
+            {% endif %} 
+        </div>
+    </div>
+{% endblock %}

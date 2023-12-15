@@ -1,0 +1,37 @@
+{% extends 'base_public.html.twig' %}
+{% block title %}Matrícula{% endblock %}
+{% block body %}
+
+<div class="card m-5">
+    <div class="card-body">
+        <h1>Proceso de Prematrícula Año 2023</h1>
+        <p>Sr.(a) Apoderado(a), como una manera de facilitar el proceso de Matrícula hemos confeccionado una FICHA DE PREMATRÍCULA DIGITAL que usted deberá completar, considerando las siguientes instrucciones:</p>
+        <ul>
+            <li>Debe revisar y completar todos los campos requeridos.</li>
+            <li>Una vez completada la Ficha de Prematrícula deberá ser validada presencialmente en el colegio y estampar su firma.</li>
+            <li>La asistencia el día de la Validación de Matrícula, es de carácter OBLIGATORIO.</li>
+            <li>La ficha completada deberá llevarla impresa al colegio, el día de la Validación de Matrícula.</li>
+            <li>Los documentos tales como: Proyecto Educativo Institucional, Reglamento Interno y Manual de Convivencia, Reglamento de Evaluación, Calificación y Promoción Escolar debe descargarlos y leerlos para su conocimiento.</li>
+        </ul>
+        <h2>Fecha y horario de validación de matrícula</h2>
+        <table class="table table-striped table-bordered">
+            <tr><td>Primero y Segundo 2023</td><td>19 de diciembre</td><td>10:00 a 12:30 hrs.</td></tr>
+            <tr><td>Tercero y Cuarto 2023</td><td>19 de diciembre</td><td>10:00 a 12:30 hrs.</td></tr>
+            <tr><td>Quinto y Sexto 2023</td><td>20 de diciembre</td><td>10:00 a 12:30 hrs.</td></tr>
+            <tr><td>Séptimo y Octavo 2023</td><td>20 de diciembre</td><td>10:00 a 12:30 hrs.</td></tr>
+            <tr><td>Kinder 2023 y Alumnos Nuevos</td><td>21 de diciembre</td><td>10:00 a 12:30 hrs.</td></tr>
+        </table>
+        <h2>Documentos</h2>
+            <ul>
+            <li><a href="{{ asset("proyecto-educativo-institucional.pdf") }}" target="_new" download>Proyecto Educativo Institucional (PDF)</a></li>
+            <li><a href="{{ asset("reglamento-interno-y-manual-de-convivencia.pdf") }}" target="_new" download>Reglamento Interno y Manual de Convivencia (PDF)</a></li>
+            <li><a href="{{ asset("reglamento-interno-de-evaluacion-calificacion-y-promocion-escolar.pdf") }}" target="_new" download>Reglamento de Evaluación, Calificación y Promoción Escolar (PDF)</a></li>
+            </ul>
+        </li>
+
+        <a href="{{ path('matricula_apoderado') }}" class="btn btn-primary">Completar Ficha de Prematrícula</a>
+    </div>  
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,46 @@
+{% extends 'base_public.html.twig' %}
+{% block title %}Matrícula{% endblock %}
+{% block body %}
+
+<div class="card mt-3 mb-3">
+    <div class="card-header">
+        <h3 class="card-title">Ficha de Prematrícula</h3>
+    </div>
+    <div class="card-body">
+        <div class="row mt-3">
+            <div class="col-12">Hemos registrado la ficha de prematricula del estudiante {{ item.nombres }} {{ item.apellidoPaterno }} {{ item.apellidoMaterno }}</div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12"><b>IMPORTANTE:</b> El proceso NO ha concluido, usted será citado a entregar los siguientes documentos completados y firmados en el colegio:</div>
+        </div>
+        <table class="table table-striped table-bordered">
+        <tr><td>Ficha de Pre-matricula</td><td></td><td><a href="{{ asset("pdf/" ~ item.pdf) }}" class="btn btn-primary" target="_new">Descargar PDF</a></td></tr>
+        <tr><td>Carta de Compromiso N° 1</td><td></td><td><a href="{{ asset("carta-compromiso-1-2022.pdf?2") }}" class="btn btn-primary" target="_new">Descargar PDF</a></td></tr>
+        <tr><td>Autorización de Asistencia Espiritual</td><td></td><td><a href="{{ asset("autorizacion-asistencia-espiritual-2022.pdf?2") }}" class="btn btn-primary" target="_new">Descargar PDF</a></td></tr>
+        <tr>
+            <td>Carta de Compromiso "Reglamento Uso de Uniforme"</td>
+            <td>Kinder a Segundo (Damas)</td>
+            <td><a href="{{ asset("reglamento-uniforme-kinder-a-segundo-damas.pdf?2") }}" class="btn btn-primary" target="_new">Descargar PDF</a></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Kinder a Segundo (Varones)</td>
+            <td><a href="{{ asset("reglamento-uniforme-kinder-a-segundo-varones.pdf?2") }}" class="btn btn-primary" target="_new">Descargar PDF</a></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Tercero a Octavo (Damas)</td>
+            <td><a href="{{ asset("reglamento-uniforme-tercero-a-octavo-damas.pdf?2") }}" class="btn btn-primary" target="_new">Descargar PDF</a></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Tercero a Octavo (Varones)</td>
+            <td><a href="{{ asset("reglamento-uniforme-tercero-a-octavo-varones.pdf?2") }}" class="btn btn-primary" target="_new">Descargar PDF</a></td>
+        </tr>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
+

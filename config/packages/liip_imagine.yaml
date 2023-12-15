@@ -1,0 +1,19 @@
+liip_imagine:
+    # valid drivers options include "gd" or "gmagick" or "imagick"
+    driver: "imagick"
+    resolvers:
+        default:
+            web_path: ~
+    filter_sets:
+        cache: ~
+        # the name of the "filter set"
+        mini:
+            # adjust the image quality to 75%
+            quality: 100
+            # list of transformations to apply (the "filters")
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [60, 90], mode: inset }
+                # create a 2px black border: center the thumbnail on a black background
+                # 4px larger to create a 2px border around the final image
+                background: { size: [64, 94], position: center, color: '#FFFFFF' }

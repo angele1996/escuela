@@ -1,0 +1,51 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Biblioteca{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Nuevo Ejemplar</h3>
+            </div>
+            <div class="card-body">
+                <span class="help-block">{{ form_errors(form) }}</span>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            {{ form_label(form.copias) }}
+                            {{ form_widget(form.copias, { 'attr': {'class': 'form-control'} }) }}
+                            <span class="invalid">{{ form_errors(form.copias) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            {{ form_label(form.estado) }}
+                            {{ form_widget(form.estado, { 'attr': {'class': 'form-control select2'} }) }}
+                            <span class="invalid">{{ form_errors(form.estado) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            {{ form_label(form.ubicacion) }}
+                            {{ form_widget(form.ubicacion, { 'attr': {'class': 'form-control select2'} }) }}
+                            <span class="invalid">{{ form_errors(form.ubicacion) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            {{ form_label(form.codigoInicial) }}
+                            {{ form_widget(form.codigoInicial, { 'attr': {'class': 'form-control'} }) }}
+                            Dejar valor 0 para generar codigos automáticos
+                            <span class="invalid">{{ form_errors(form.codigoInicial) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{{ path('biblioteca-libro', { libro: libro.id }) }}" class="btn btn-danger">Cancelar</a>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

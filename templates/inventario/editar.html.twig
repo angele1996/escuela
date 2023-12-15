@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inventario{% endblock %}
+
+{% block body %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ path('homepage') }}">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('inventario') }}">Inventario</a></li>
+    <li class="breadcrumb-item active"><a href="{{ path('inventario-editar', { item: item.id }) }}">Editar</a></li>
+</ol>
+<div class="container-fluid">
+    <div id="ui-view">
+        <h1>Editar Item</h1>
+
+        {{ form_start(form) }}
+            <div class="card">
+                <div class="card-header">
+                    <h2>Item</h2>
+                </div>
+                <div class="card-body">
+                    <span class="help-block">{{ form_errors(form) }}</span>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{ form_label(form.codigo) }}
+                                {{ form_widget(form.codigo, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.codigo) }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{ form_label(form.nombre) }}
+                                {{ form_widget(form.nombre, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.nombre) }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{ form_label(form.tipoItem) }}
+                                {{ form_widget(form.tipoItem, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.tipoItem) }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{ form_label(form.ubicacion) }}
+                                {{ form_widget(form.ubicacion, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.ubicacion) }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{ form_label(form.marca) }}
+                                {{ form_widget(form.marca, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.marca) }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{ form_label(form.modelo) }}
+                                {{ form_widget(form.modelo, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.modelo) }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{ form_label(form.fechaIncorporacion) }}
+                                {{ form_widget(form.fechaIncorporacion, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.fechaIncorporacion) }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{ form_label(form.estadoItem) }}
+                                {{ form_widget(form.estadoItem, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.estadoItem) }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{ form_label(form.responsable) }}
+                                {{ form_widget(form.responsable, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.responsable) }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                {{ form_label(form.observaciones) }}
+                                {{ form_widget(form.observaciones, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.observaciones) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a href="{{ path('inventario') }}" class="btn btn-danger">Cancelar</a>
+                </div>
+            </div>
+        {{ form_end(form) }}
+
+    </div>
+</div>
+
+{% endblock %}

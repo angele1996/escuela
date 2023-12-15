@@ -1,0 +1,143 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Préstamos{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-6">
+        {{ form_start(formPersona) }}
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Buscador de Alumno o Profesor</h3>
+                </div>
+                <div class="card-body">
+                    <span class="help-block">{{ form_errors(formPersona) }}</span>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                {{ form_label(formPersona.credencial) }}
+                                {{ form_widget(formPersona.credencial, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(formPersona.credencial) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <a href="{{ path('biblioteca') }}" class="btn btn-danger">Cancelar</a>
+                </div>
+            </div>
+        {{ form_end(formPersona) }}
+    </div>
+
+    {% if persona %}
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Identificación</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Nombre
+                            <b>{{ persona }}</b>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <b>{{ persona.tipoPersona }}</b>
+                            {% for alumno in persona.alumnos %}
+                                {% if alumno.curso.anio.vigente %}
+                                    <b>{{ alumno.curso }}</b>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Credencial
+                            <b>{{ persona.credencial }}</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Préstamos Vigentes</h3>
+            </div>
+            <div class="card-body">
+                {{ form_start(formEjemplar) }}
+                    <span class="help-block">{{ form_errors(formEjemplar) }}</span>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            {{ form_label(formEjemplar.codigo) }}
+                        </div>
+                        <div class="col-sm-3">
+                            {{ form_widget(formEjemplar.codigo, { 'attr': {'class': 'form-control'} }) }}
+                            <span class="invalid">{{ form_errors(formEjemplar.codigo) }}</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="submit" class="btn btn-primary">Prestar</button>
+                        </div>
+                    </div>
+                {{ form_end(formEjemplar) }}
+                <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Autor</th>
+                            <th>Editorial</th>
+                            <th>Fecha de Préstamo</th>
+                            <th>Fecha de Devolución</th>
+                        </tr>   
+                    </thead>
+                    <tbody>
+                    {% set i = 0  %}
+                    {% for prestamo in persona.prestamos %}
+                        {% if not prestamo.esDevuelto %}
+                            {% set  i = i + 1  %}
+                            <tr>
+                                <td>{{ i }}</td>
+                                <td>{{ prestamo.ejemplar.codigo|default('')|upper }}</td>
+                                <td>{{ prestamo.ejemplar.libro.nombre|default('')|upper }}</td>
+                                <td>
+                                {% for item_autor in prestamo.ejemplar.libro.autors %}
+                                        {{ item_autor }}<br/>
+                                {% endfor %}
+                                </td>
+                                <td>{{ prestamo.ejemplar.libro.editorial|default('')|upper }}</td>
+                                <td>{{ prestamo.fechaPrestamo ? prestamo.fechaPrestamo|date('d-m-Y') }}</td>
+                                <td>{{ prestamo.fechaDevolucion ? prestamo.fechaDevolucion|date('d-m-Y') }}</td>
+                                <td>
+                                    <a href="{{ path('biblioteca-prestamos-renovar', { prestamo: prestamo.id }) }}" class="btn btn-block btn-success">Renovar</a>
+                                    <a href="{{ path('biblioteca-prestamos-devolver', { prestamo: prestamo.id }) }}" class="btn btn-block btn-success">Devolver</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    {% if i == 0 %}
+                        <tr><td colspan="7">No hay datos.</td></tr>
+                    {% endif %} 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $('#biblioteca_ejemplar_codigo').focus();
+        });    
+    </script>
+{% endblock %}

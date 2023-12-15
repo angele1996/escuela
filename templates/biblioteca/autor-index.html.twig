@@ -1,0 +1,64 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Biblioteca{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Buscador de Autores</h3>
+            </div>
+            <div class="card-body">
+                <span class="help-block">{{ form_errors(form) }}</span>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {{ form_label(form.nombre) }}
+                            {{ form_widget(form.nombre, { 'attr': {'class': 'form-control'} }) }}
+                            <span class="invalid">{{ form_errors(form.nombre) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a href="{{ path('biblioteca-autor-agregar') }}" class="btn btn-success">Agregar</a>
+            </div>
+        </div>
+    {{ form_end(form) }}
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Lista de Autores</h3>
+        </div>
+        <div class="card-body">
+            {% if lista|length > 0 %}
+                <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th></th>
+                        </tr>   
+                    </thead>
+                    <tbody>
+                    {% set i = 0  %}
+                    {% for item in lista %}
+                        {% set  i = i + 1  %}
+                        <tr>
+                            <td>{{ i }}</td>
+                            <td>{{ item.nombre|default('')|upper }}</td>
+                            <td>
+                                <a href="{{ path('biblioteca-autor-editar', { autor: item.id }) }}" class="btn btn-block btn-success">Editar</a>
+                                <a href="{{ path('biblioteca-autor-eliminar', { autor: item.id }) }}" class="btn btn-block btn-danger" onclick="return confirm('¿Está seguro de eliminar este autor?');">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                No hay datos.
+            {% endif %} 
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base_admin.html.twig' %}
+
+
+{% block title %}Editar Curso{% endblock %}
+
+{% block body %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ path('homepage') }}">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('main-cursos') }}">Curso</a></li>
+    <li class="breadcrumb-item active"><a href="{{ path('main-cursos-editar', { curso: curso.id }) }}">Editar</a></li>
+</ol>
+<div class="container-fluid">
+    <div id="ui-view">
+        <h1>Editar Curso</h1>
+
+        {{ form_start(form) }}
+            <div class="card">
+                <div class="card-header">
+                    <h2>Editar Curso</h2>
+                </div>
+                <div class="card-body">
+                    <span class="help-block">{{ form_errors(form) }}</span>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{ form_label(form.anio) }}
+                                {{ form_widget(form.anio, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.anio) }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{ form_label(form.nombre) }}
+                                {{ form_widget(form.nombre, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="invalid">{{ form_errors(form.nombre) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a href="{{ path('main-cursos') }}" class="btn btn-danger">Cancelar</a>
+                </div>
+            </div>
+        {{ form_end(form) }}
+
+    </div>
+</div>
+
+{% endblock %}

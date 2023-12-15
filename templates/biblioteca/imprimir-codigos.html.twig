@@ -1,0 +1,16 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Biblioteca: Imprimir Códigos{% endblock %}
+
+{% block body %}
+        <div class="card">
+            <div class="card-header">
+                <h2>Imprimir Códigos</h2>
+            </div>
+            <div class="card-body">
+            </div>
+            <div class="card-footer">
+                <a href="{{ path('biblioteca-imprimir-codigos-no-impresos') }}" class="btn btn-success">Imprimir códigos no impresos</a>
+            </div>
+        </div>
+{% endblock %}

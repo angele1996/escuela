@@ -1,0 +1,85 @@
+{% extends 'base_public.html.twig' %}
+{% block title %}Matrícula{% endblock %}
+{% block body %}
+
+<div class="row">
+<div class="col-12 col-md-8">
+{{ form_start(form, {'attr': {'id': 'form_matricula'}}) }}
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Formulario de Matricula</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">{{ form_row(form.rut) }}</div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success">Continuar</button>
+        <a class="btn btn-warning" href="{{ path('homepage') }}">Cancelar</a>
+    </div>
+</div>
+{{ form_end(form) }}
+</div>
+<!--
+<div class="col-12 col-md-8">
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Formulario de Matricula</h3>
+    </div>
+    <div class="card-body">
+    <p>Ha concluido el proceso de Pre-matrícula on line. Los apoderados que no alcanzaron a completar la ficha, deben acercarse el día martes 22 de diciembre en el horario establecido.</p>
+   </div>
+</div>
+</div>
+-->
+<div class="col-12 col-md-4 mt-3 mb-3" style="background-color: lightblue;">
+<h1>Instructivo Matrícula 2023</h1>
+<p>Sr.(a) Apoderado(a), como una manera de facilitar el proceso de Matrícula,
+debido a la contingencia, hemos confeccionado una FICHA DE MATRÍCULA
+DIGITAL que usted deberá completar, considerando las siguientes instrucciones:</p>
+<ul>
+<li>Debe completar todos los campos requeridos.</li>
+<li>Una vez completada la Ficha de Matrícula deberá ser validada
+presencialmente en el colegio y estampar su firma.</li>
+<li>La asistencia el día de la Validación de Matrícula, es de carácter
+OBLIGATORIO.</li>
+<li>La Ficha completada estará disponible e impresa en el colegio, el día de
+la Validación de Matrícula.</li>
+<li>Los documentos tales como: Proyecto Educativo Institucional, Manual de
+Convivencia y Reglamento Interno debe
+descargarlos y leerlos para su conocimiento.</li>
+<li>Fecha de validación de matrícula:
+<br/><b>22 de diciembre 2020</b></li>
+<li>Horarios:
+<ul>
+<li>Kinder, Primero y Segundo: 9:00 a 10:00 hrs.</li>
+<li>Tercero, Cuarto y Quinto: 10:00 a 11:00 hrs.</li>
+<li>Sexto, Séptimo y Octavo: 11:00 a 12:00 hrs.</li>
+</ul>
+</li>
+<li>Documentos:
+<ul>
+<li><a href="{{ asset("proyecto-educativo-institucional.pdf") }}" target="_new">Proyecto Educativo Institucional (PDF)</a></li>
+<li><a href="{{ asset("reglamento-interno-de-convivencia-escolar-y-protocolos-de-actuacion.pdf") }}" target="_new">Manual de Convivencia (PDF)</a></li>
+<li><a href="{{ asset("reglamento-interno-de-evaluacion-calificacion-y-promocion-escolar.pdf") }}" target="_new">Reglamento Interno (PDF)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $('#form_matricula').submit(function() {
+        var rut = $('.input-rut').val();
+        if(!$.validateRut(rut, null, { minimumLength: 4 })) {
+            alert("El rut ingresado no es válido!");
+            return false;
+        }
+        return true;
+    });
+</script>
+{% endblock %}            

@@ -1,0 +1,67 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Biblioteca - Estante{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Mover Libro de Estantes</h3>
+            </div>
+            <div class="card-body">
+
+            <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>ISBN</th>
+                            <th>Nombre</th>
+                            <th>Autor</th>
+                            <th>Editorial</th>
+                            <th>Cantidad</th>
+                        </tr>   
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                            {% if libro.image %}
+                            <img src="{{ vich_uploader_asset(libro, 'imageFile') | imagine_filter('mini') }}" />
+                            {% else %}
+                            <img src="{{ asset('images/avatar-book.png') }}" class="img-circle" width="40px" />
+                            {% endif %}
+                            </td>
+                            <td>{{ libro.isbn|default('')|upper }}</td>
+                            <td>{{ libro.nombre|default('')|upper }}</td>
+                            <td>
+                                {% for item_autor in libro.autors %}
+                                    {{ item_autor }}<br/>
+                                {% endfor %}
+                            </td>
+                            <td>{{ libro.editorial|default('')|upper }}</td>
+                            <td>{{ libro.ejemplars|length }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <span class="help-block">{{ form_errors(form) }}</span>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ form_label(form.estante) }}
+                                    {{ form_widget(form.estante, { 'attr': {'class': 'form-control'} }) }}
+                                    <span class="invalid">{{ form_errors(form.estante) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{{ path('biblioteca-estantes') }}" class="btn btn-danger">Cancelar</a>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

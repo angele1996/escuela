@@ -1,0 +1,108 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Biblioteca{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Datos del Libro</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>Nombre</b>
+                                {{ libro.nombre|default('')|upper }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>Ejemplares</b>
+                                {{ libro.ejemplars|length }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>ISBN</b>
+                                {{ libro.isbn|default('')|upper }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>Editorial</b>
+                                {{ libro.editorial|default('')|upper }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>Autor</b>
+                                {% for item_autor in libro.autors %}
+                                    {{ item_autor }}<br/>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <b>observaciones</b>
+                                {{ libro.observaciones }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('biblioteca-libro-editar', { libro: libro.id }) }}" class="btn btn-success">Editar Libro</a>
+                    <a href="{{ path('biblioteca-libro-eliminar', { libro: libro.id }) }}" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar este libro?');">Eliminar Libro</a>
+                    <a href="{{ path('biblioteca-ejemplar-agregar', { libro: libro.id }) }}" class="btn btn-success">Agregar Ejemplar</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Lista de Ejemplares</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Código</th>
+                                <th>Estado</th>
+                                <th>Ubicación</th>
+                                <th></th>
+                            </tr>   
+                        </thead>
+                        <tbody>
+                        {% set i = 0  %}
+                        {% for item_ejemplar in libro.ejemplars %}
+                            {% if item_ejemplar.activo %}
+                                {% set  i = i + 1  %}
+                                <tr>
+                                    <td>{{ i }}</td>
+                                    <td>{{ item_ejemplar.codigo|default('')|upper }}</td>
+                                    <td>{{ item_ejemplar.estadoLibro|default('')|upper }}</td>
+                                    <td>{{ item_ejemplar.ubicacion|default('')|upper }}</td>
+                                    <td>
+                                        <a href="{{ path('biblioteca-ejemplar-editar', { libro: libro.id, ejemplar: item_ejemplar.id }) }}" class="btn btn-block btn-success">Editar</a>
+                                        <a href="{{ path('biblioteca-ejemplar-eliminar', { libro: libro.id, ejemplar: item_ejemplar.id }) }}" class="btn btn-block btn-danger" onclick="return confirm('¿Está seguro de eliminar este ejemplar?');">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        {% if i == 0 %}
+                            <tr><td colspan="5">No hay datos</td></tr>
+                        {% endif %} 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            {% if libro.image %}
+            <img src="{{ vich_uploader_asset(libro, 'imageFile') }}" width="100%" alt="{{ libro }}" />
+            {% else %}
+            <img src="{{ asset('images/avatar-book.png') }}" width="100%" alt="{{ libro }}" />
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

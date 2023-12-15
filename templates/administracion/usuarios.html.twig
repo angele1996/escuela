@@ -1,0 +1,67 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Usuarios{% endblock %}
+
+
+{% block body %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ path('homepage') }}">Inicio</a></li>
+    <li class="breadcrumb-item active"><a href="{{ path('admin-usuarios') }}">Usuarios</a></li>
+</ol>
+<div class="container-fluid">
+    <div id="ui-view">
+        <h1>Usuarios</h1>
+        <div class="card">
+            <div class="card-header">
+                <h2>Listado</h2>
+            </div>
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <a href="{{ path('admin-usuarios-agregar') }}" class="btn btn-success">Agregar</a>
+                    </div>
+                </div>
+                {% if lista|length > 0 %}
+                    <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Usuario</th>
+                                <th>Email</th>
+                                <th>Permiso Administración</th>
+                                <th>Permiso Biblioteca</th>
+                                <th>Permiso Inventario</th>
+                            </tr>   
+                        </thead>
+                        <tbody>
+                        {% set i = 0  %}
+                        {% for item in lista %}
+                            {% set  i = i + 1  %}
+                            <tr>
+                                <td>{{ i }}</td>
+                                <td>{{ item.username|default('') }}</td>
+                                <td>{{ item.email|default('') }}</td>
+                                <td>{{ item.permisoAdministrador ? "SI" : "NO" }}</td>
+                                <td>{{ item.permisoBiblioteca ? "SI" : "NO" }}</td>
+                                <td>{{ item.permisoInventario ? "SI" : "NO" }}</td>
+                                <td>
+                                    <a href="{{ path('admin-usuarios-editar', { user: item.id }) }}" class="btn btn-success">Editar</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('admin-usuarios-password', { user: item.id }) }}" class="btn btn-success">Cambiar Contraseña</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    No hay datos.
+                {% endif %} 
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+

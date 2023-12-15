@@ -1,0 +1,70 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Biblioteca{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Modificar Libro</h3>
+            </div>
+            <div class="card-body">
+                <span class="help-block">{{ form_errors(form) }}</span>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ form_label(form.nombre) }}
+                                    {{ form_widget(form.nombre, { 'attr': {'class': 'form-control'} }) }}
+                                    <span class="invalid">{{ form_errors(form.nombre) }}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ form_label(form.isbn) }}
+                                    {{ form_widget(form.isbn, { 'attr': {'class': 'form-control'} }) }}
+                                    <span class="invalid">{{ form_errors(form.isbn) }}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    {{ form_label(form.editorial) }}
+                                    {{ form_widget(form.editorial, { 'attr': {'class': 'form-control select2'} }) }}
+                                    <span class="invalid">{{ form_errors(form.editorial) }}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    {{ form_label(form.autors) }}
+                                    {{ form_widget(form.autors, { 'attr': {'class': 'form-control select2'} }) }}
+                                    <span class="invalid">{{ form_errors(form.autors) }}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    {{ form_label(form.observaciones) }}
+                                    {{ form_widget(form.observaciones, { 'attr': {'class': 'form-control'} }) }}
+                                    <span class="invalid">{{ form_errors(form.observaciones) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            {{ form_label(form.imageFile) }}
+                            <div style="width:100%" width="100%">
+                            {{ form_widget(form.imageFile, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                            <span class="invalid">{{ form_errors(form.imageFile) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{{ path('biblioteca') }}" class="btn btn-danger">Cancelar</a>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

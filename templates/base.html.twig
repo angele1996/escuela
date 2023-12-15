@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>{% block title %}Colegio Dr. Willis Hoover K.{% endblock %}</title>
+        <link href="{{ asset('/coreui/css/coreui.min.css') }}" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body class="app pace-done">
+        <header class="navbar navbar-expand navbar-light bg-light">
+            <a class="navbar-brand" href="{{ path('homepage') }}">
+                <img src="{{ asset('logo_hoover.jpg') }}" height="50" alt="Logo">
+            </a>
+            <ul class="navbar-nav mr-auto">
+            {% if is_granted('ROLE_INVENTARIO') %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                Inventario
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ path('inventario-menu') }}">Buscador</a>
+                <a class="dropdown-item" href="{{ path('inventario-agregar') }}">Agregar</a>
+                </div>
+            </li>
+            {% endif %}
+            {% if is_granted('ROLE_BIBLIOTECA') %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Biblioteca
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ path('biblioteca') }}">Catálogo</a>
+                <a class="dropdown-item" href="{{ path('biblioteca-libro-agregar') }}">Agregar Libro</a>
+                <a class="dropdown-item" href="{{ path('biblioteca-imprimir-codigos') }}">Imprimir Códigos</a>
+                <a class="dropdown-item" href="{{ path('biblioteca-prestamos-menu') }}">Préstamos</a>
+                <a class="dropdown-item" href="{{ path('biblioteca-prestamo-masivo') }}">Préstamo Masivo</a>
+                <a class="dropdown-item" href="{{ path('biblioteca-reporte-prestamos') }}">Reporte Préstamos</a>
+                <a class="dropdown-item" href="{{ path('biblioteca-devoluciones') }}">Devoluciones</a>
+                <a class="dropdown-item" href="{{ path('biblioteca-autor-menu') }}">Autores</a>
+                <a class="dropdown-item" href="{{ path('biblioteca-editorial-menu') }}">Editoriales</a>
+                </div>
+            </li>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tablas
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ path('main-anios') }}">Año Académico</a>
+                <a class="dropdown-item" href="{{ path('main-cursos') }}">Cursos</a>
+                <a class="dropdown-item" href="{{ path('main-profesores') }}">Profesores</a>
+                <a class="dropdown-item" href="{{ path('main-alumnos') }}">Alumnos</a>
+                </div>
+            </li>
+            {% endif %}
+            </ul>
+        </header>
+        <div class="app-body">
+            <main class="main">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+            {% block body %}{% endblock %}
+            </main>
+            <aside class="aside-menu">
+            </aside>
+        </div>
+        <footer class="app-footer">
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="{{ asset('/coreui/js/coreui.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>        
+        {% block javascripts %}{% endblock %}
+<script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+</script>
+    </body>
+</html>

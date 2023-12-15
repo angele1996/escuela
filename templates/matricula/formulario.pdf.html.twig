@@ -1,0 +1,318 @@
+<table border="0" cellspacing="1" cellpadding="1">
+<tr>
+<td style="width:60%"><img src="{{ logo }}" height="50"></td>
+<td style="width:20%" height="100" align="center">
+{% if foto_apoderado %}
+<img src="{{ foto_apoderado }}" height="100">
+<br/>
+{{ item.apoderadoNombre|default('')|upper }}
+{% endif %}
+</td>
+<td style="width:20%" height="100" align="center">
+{% if foto_estudiante %}
+<img src="{{ foto_estudiante }}" height="100">
+<br/>
+{{ item.nombres|default('')|upper }} {{ item.apellidoPaterno|default('')|upper }} {{ item.apellidoMaterno|default('')|upper }}
+{% endif %}
+</td>
+</tr>
+</table>
+
+<h1 align="center">FICHA DE MATRÍCULA AÑO 2022</h1>
+<h2>Datos del Estudiante</h2>
+<table border="1" cellspacing="1" cellpadding="1">
+<tr>
+<td bgcolor="silver">RUN</td>
+<td bgcolor="silver">Curso</td>
+<td bgcolor="silver"></td>
+</tr>
+<tr>
+<td>{{ item.rut|default('')|upper }}</td>
+<td>{{ item.curso|default('')|upper }}</td>
+<td></td>
+</tr>
+<tr>
+<td bgcolor="silver">Apellido Paterno</td>
+<td bgcolor="silver">Apellido Materno</td>
+<td bgcolor="silver">Nombres</td>
+</tr>
+<tr>
+<td>{{ item.apellidoPaterno|default('')|upper }}</td>
+<td>{{ item.apellidoMaterno|default('')|upper }}</td>
+<td>{{ item.nombres|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">Fecha de Nacimiento</td>
+<td bgcolor="silver">Ciudad Nacimiento</td>
+<td bgcolor="silver">País de Origen</td>
+</tr>
+<tr>
+<td>{{ item.fechaNacimiento ? item.fechaNacimiento|date('d-m-Y') }}</td>
+<td>{{ item.ciudadNacimiento|default('')|upper }}</td>
+<td>{{ item.nacionalidad|default('')|upper }}</td>
+</tr>
+<tr>
+<td colspan="2" bgcolor="silver">Domicilio</td>
+<td bgcolor="silver">Comuna</td>
+</tr>
+<tr>
+<td colspan="2">{{ item.domicilio|default('')|upper }}</td>
+<td>{{ item.comuna|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">Género</td>
+<td bgcolor="silver">Teléfono</td>
+<td bgcolor="silver">Correo Electrónico</td>
+</tr>
+<tr>
+<td>{{ item.genero|default('')|upper }}</td>
+<td>{{ item.telefono|default('')|upper }}</td>
+<td>{{ item.correoElectronico|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver" colspan="3">Teléfonos de contacto y/o urgencias</td>
+</tr>
+<tr>
+<td bgcolor="silver">Nombre</td>
+<td bgcolor="silver">Parentesco</td>
+<td bgcolor="silver">Número</td>
+</tr>
+<tr>
+<td>{{ item.nombreTelefonoContacto1|default('')|upper }}</td>
+<td>{{ item.parentescoTelefonoContacto1|default('')|upper }}</td>
+<td>{{ item.numeroTelefonoContacto1|default('')|upper }}</td>
+</tr>
+<tr>
+<td>{{ item.nombreTelefonoContacto2|default('')|upper }}</td>
+<td>{{ item.parentescoTelefonoContacto2|default('')|upper }}</td>
+<td>{{ item.numeroTelefonoContacto2|default('')|upper }}</td>
+</tr>
+<tr>
+<td>{{ item.nombreTelefonoContacto3|default('')|upper }}</td>
+<td>{{ item.parentescoTelefonoContacto3|default('')|upper }}</td>
+<td>{{ item.numeroTelefonoContacto3|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">¿Con quien vive el niño?</td>
+<td bgcolor="silver">Colegio de Procedencia</td>
+<td bgcolor="silver">¿Repite curso?</td>
+</tr>
+<tr>
+<td>{{ item.conQuienVive|default('')|upper }}</td>
+<td>{{ item.colegioProcedencia|default('')|upper }}</td>
+<td>{{ item.repiteCurso ? 'SI' : 'NO' }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">¿Presenta Necesidades Educativas Especiales?</td>
+<td bgcolor="silver" colspan="2">¿Cuál?</td>
+</tr>
+<tr>
+<td>{{ item.necesidadesEducativasEspeciales ? 'SI' : 'NO' }}</td>
+<td colspan="2">{{ item.necesidadesEducativasEspecialesCual|default('')|upper }}</td>
+</tr>
+</table>
+[SALTO_SECCION]
+<h2>Datos del Padre</h2>
+<table border="1" cellspacing="1" cellpadding="1">
+<tr>
+<td bgcolor="silver">RUN</td>
+<td bgcolor="silver">Nombre Completo</td>
+<td bgcolor="silver">Teléfono</td>
+</tr>
+<tr>
+<td>{{ item.padreRut|default('')|upper }}</td>
+<td>{{ item.padreNombre|default('')|upper }}</td>
+<td>{{ item.padreTelefono|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">Correo Electrónico</td>
+<td bgcolor="silver">Nivel Educacional</td>
+<td bgcolor="silver">Dirección</td>
+</tr>
+<tr>
+<td>{{ item.padreCorreoElectronico|default('')|upper }}</td>
+<td>{{ item.padreNivelEducacional|default('')|upper }}</td>
+<td>{{ item.padreDireccion|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">Profesión</td>
+<td bgcolor="silver">Lugar de Trabajo</td>
+<td bgcolor="silver">Dirección de Trabajo</td>
+</tr>
+<tr>
+<td>{{ item.padreProfesion|default('')|upper }}</td>
+<td>{{ item.padreLugarTrabajo|default('')|upper }}</td>
+<td>{{ item.padreDireccionTrabajo|default('')|upper }}</td>
+</tr>
+</table>
+[SALTO_SECCION]
+<h2>Datos de la Madre</h2>
+<table border="1" cellspacing="1" cellpadding="1">
+<tr>
+<td bgcolor="silver">RUN</td>
+<td bgcolor="silver">Nombre Completo</td>
+<td bgcolor="silver">Teléfono</td>
+</tr>
+<tr>
+<td>{{ item.madreRut|default('')|upper }}</td>
+<td>{{ item.madreNombre|default('')|upper }}</td>
+<td>{{ item.madreTelefono|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">Correo Electrónico</td>
+<td bgcolor="silver">Nivel Educacional</td>
+<td bgcolor="silver">Dirección</td>
+</tr>
+<tr>
+<td>{{ item.madreCorreoElectronico|default('')|upper }}</td>
+<td>{{ item.madreNivelEducacional|default('')|upper }}</td>
+<td>{{ item.madreDireccion|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">Profesión</td>
+<td bgcolor="silver">Lugar de Trabajo</td>
+<td bgcolor="silver">Dirección de Trabajo</td>
+</tr>
+<tr>
+<td>{{ item.madreProfesion|default('')|upper }}</td>
+<td>{{ item.madreLugarTrabajo|default('')|upper }}</td>
+<td>{{ item.madreDireccionTrabajo|default('')|upper }}</td>
+</tr>
+</table>
+[SALTO_SECCION]
+<h2>Datos del Apoderado</h2>
+<table border="1" cellspacing="1" cellpadding="1">
+<tr>
+<td bgcolor="silver">Vínculo que lo une al alumno(a)</td>
+<td bgcolor="silver">¿Vive con el niño?</td>
+<td bgcolor="silver"></td>
+</tr>
+<tr>
+<td>{{ item.apoderadoParentesco|default('')|upper }}</td>
+<td>{{ item.apoderadoViveConEstudiante ? 'SI' : 'NO'  }}</td>
+<td></td>
+</tr>
+<tr>
+<td bgcolor="silver">RUN</td>
+<td bgcolor="silver">Nombre Completo</td>
+<td bgcolor="silver">Teléfono</td>
+</tr>
+<tr>
+<td>{{ item.apoderadoRut|default('')|upper }}</td>
+<td>{{ item.apoderadoNombre|default('')|upper }}</td>
+<td>{{ item.apoderadoTelefono|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">Correo Electrónico</td>
+<td bgcolor="silver">Género</td>
+<td bgcolor="silver">Estado Civil</td>
+</tr>
+<tr>
+<td>{{ item.apoderadoCorreoElectronico|default('')|upper }}</td>
+<td>{{ item.apoderadoGenero|default('')|upper }}</td>
+<td>{{ item.apoderadoEstadoCivil|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">Nivel Educacional</td>
+<td bgcolor="silver">Dirección</td>
+<td bgcolor="silver">Profesión</td>
+</tr>
+<tr>
+<td>{{ item.apoderadoNivelEducacional|default('')|upper }}</td>
+<td>{{ item.apoderadoDireccion|default('')|upper }}</td>
+<td>{{ item.apoderadoProfesion|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">Lugar de Trabajo</td>
+<td bgcolor="silver">Dirección de Trabajo</td>
+<td bgcolor="silver"></td>
+</tr>
+<tr>
+<td>{{ item.apoderadoLugarTrabajo|default('')|upper }}</td>
+<td>{{ item.apoderadoDireccionTrabajo|default('')|upper }}</td>
+<td></td>
+</tr>
+</table>
+[SALTO_SECCION]
+<h2>Datos Adicionales</h2>
+<table border="1" cellspacing="1" cellpadding="1">
+<tr>
+<td bgcolor="silver">¿Los padres o el apoderado profesan alguna Religión?</td>
+<td bgcolor="silver">Selección religión</td>
+<td bgcolor="silver">¿Cuál?</td>
+</tr>
+<tr>
+<td>{{ item.padresProfesanReligion ? 'SI' : 'NO' }}</td>
+<td>{{ item.padresSeleccionReligion|default('')|upper }}</td>
+<td>{{ item.padresReligion|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">¿Quién retira a su hijo del Establecimiento?</td>
+<td colspan="2" bgcolor="silver">Indique nombre y apellido</td>
+</tr>
+<tr>
+<td>{{ item.quienRetiraParentesco|default('')|upper }}</td>
+<td colspan="2">{{ item.quienRetiraNombre|default('')|upper }}</td>
+</tr>
+<tr>
+<td colspan="3" bgcolor="silver">Observaciones</td>
+</tr>
+<tr>
+<td colspan="3">{{ item.observaciones|default('')|upper }}</td>
+</tr>
+</table>
+[SALTO_SECCION]
+<h2>Ficha Clínica</h2>
+<table border="1" cellspacing="1" cellpadding="1">
+<tr>
+<td bgcolor="silver">¿El estudiante tiene seguro de accidente en alguna institución particular?</td>
+<td bgcolor="silver">Nombre de la institución donde tiene seguro</td>
+<td bgcolor="silver">Registre teléfono de la institución en caso de emergencia</td>
+</tr>
+<tr>
+<td>{{ item.clinicaTieneSeguro ? 'SI' : 'NO'  }}</td>
+<td>{{ item.clinicaInstitucionSeguro|default('')|upper }}</td>
+<td>{{ item.clinicaTelefonoInstitucionSeguro|default('')|upper }}</td>
+</tr>
+<tr>
+<td bgcolor="silver">¿El estudiante padece alguna enfermedad de cuidado especial?</td>
+<td colspan="2" bgcolor="silver">¿Cuál?</td>
+</tr>
+<tr>
+<td>{{ item.clinicaTieneEnfermedadCuidadoEspecial ? 'SI' : 'NO'  }}</td>
+<td colspan="2">{{ item.clinicaEnfermedadCuidadoEspecial|default('')|upper }}</td>
+</tr>
+<tr>
+<td colspan="3" bgcolor="silver">Si padece alguna enfermedad de cuidado especial, indique recomendaciones al Colegio</td>
+</tr>
+<tr>
+<td colspan="3">{{ item.clinicaRecomendaciones|default('')|upper }}</td>
+</tr>
+<tr>
+<td colspan="3" bgcolor="silver">Observaciones</td>
+</tr>
+<tr>
+<td colspan="3">{{ item.clinicaObservaciones|default('')|upper }}</td>
+</tr>
+</table>
+[SALTO_SECCION]
+<p>He leído y acepto los siguientes documentos del establecimiento:</p>
+<table border="0">
+<tr><td>Proyecto Educativo Institucional</td><td>_________ SI</td><td>_________ NO</td></tr>
+<tr><td>Manual de Convivencia</td><td>_________ SI</td><td>_________ NO</td></tr>
+<tr><td>Reglamento Interno</td><td>_________ SI</td><td>_________ NO</td></tr>
+<tr><td>Plan de Formación Ciudadana</td><td>_________ SI</td><td>_________ NO</td></tr>
+</table>
+<p></p>
+<table border="0">
+<tr>
+<td align="center">______________________________________</td>
+<td align="center">______________________________________</td>
+</tr>
+<tr>
+<td align="center">Firma del Padre o Madre</td>
+<td align="center">Firma del Apoderado</td>
+</tr>
+</table>
+<p>Fecha: {{ item.fechaActualizacion|date('d-m-Y H:i:s') }}</p>
+<p>Colegio Dr. Willis Hoover K. La Cisterna</p>

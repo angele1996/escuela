@@ -1,0 +1,72 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Reporte de Préstamos{% endblock %}
+
+{% block body %}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Préstamos Vigentes</h3>
+            </div>
+            <div class="card-body">
+
+            
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <a href="{{ path('biblioteca-reporte-prestamos-excel') }}" class="btn btn-success">Exportar a Excel</a>
+                        <a href="{{ path('biblioteca-reporte-prestamos-pdf') }}" class="btn btn-success">Exportar a PDF</a>
+                    </div>
+                </div>
+                
+
+                <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Autor</th>
+                            <th>Editorial</th>
+                            <th>Solicitante</th>
+                            <th>Curso</th>
+                            <th>Fecha de Préstamo</th>
+                            <th>Fecha de Devolución</th>
+                            <th>Plazo</th>
+                        </tr>   
+                    </thead>
+                    <tbody>
+                    {% set i = 0  %}
+                    {% for prestamo in lista %}
+                        {% if not prestamo.esDevuelto %}
+                            {% set  i = i + 1  %}
+                            <tr>
+                                <td>{{ i }}</td>
+                                <td>{{ prestamo.ejemplar.codigo|default('')|upper }}</td>
+                                <td>{{ prestamo.ejemplar.libro.nombre|default('')|upper }}</td>
+                                <td>
+                                {% for item_autor in prestamo.ejemplar.libro.autors %}
+                                    {{ item_autor }}<br/>
+                                {% endfor %}
+                                </td>
+                                <td>{{ prestamo.ejemplar.libro.editorial|default('')|upper }}</td>
+                                <td>{{ prestamo.persona |default('')|upper }}</td>
+                                <td>
+                                {% for alumno in prestamo.persona.alumnos %}
+                                    {% if alumno.curso.anio.vigente %}
+                                        <b>{{ alumno.curso }}</b>
+                                    {% endif %}
+                                {% endfor %}
+                                </td>
+                                <td>{{ prestamo.fechaPrestamo ? prestamo.fechaPrestamo|date('d-m-Y') }}</td>
+                                <td>{{ prestamo.fechaDevolucion ? prestamo.fechaDevolucion|date('d-m-Y') }}</td>
+                                <td>{{ prestamo.plazo|default('')|upper }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    {% if i == 0 %}
+                        <tr><td colspan="10">No hay datos.</td></tr>
+                    {% endif %} 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{% endblock %}

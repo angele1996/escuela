@@ -1,0 +1,35 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Préstamo Masivo{% endblock %}
+
+{% block body %}
+<div class="row">
+    
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Préstamo Masivo</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th></th>
+                        </tr>   
+                    </thead>
+                    <tbody>
+                    {% for curso in lista %}
+                        <tr>
+                            <td>{{ curso }}</td>
+                            <td><a href="{{ path('biblioteca-prestamo-seleccionar-curso', { curso: curso.id }) }}" class="btn btn-block btn-success">Seleccionar</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

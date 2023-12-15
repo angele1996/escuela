@@ -1,0 +1,37 @@
+{% extends 'base_public.html.twig' %}
+{% block title %}Matrícula{% endblock %}
+{% block body %}
+
+{{ form_start(form, {'attr': {'id': 'form_matricula'}}) }}
+<div class="card m-5">
+    <div class="card-body">
+        <h1>Ficha de Prematrícula</h1>
+        <div class="row">
+            <div class="col-6">{{ form_row(form.rut) }}</div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Continuar</button>
+        <a class="btn btn-danger" href="{{ path('homepage') }}">Cancelar</a>
+    </div>
+</div>
+{{ form_end(form) }}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $('#form_matricula').disableAutoFill();
+
+    $('#form_matricula').submit(function() {
+        var rut = $('.input-rut').val();
+        if(rut != '')
+        {
+            if(!$.validateRut(rut, null, { minimumLength: 4 })) {
+                alert("El rut ingresado no es válido!");
+                return false;
+            }
+        }
+        return true;
+    });
+</script>
+{% endblock %}            

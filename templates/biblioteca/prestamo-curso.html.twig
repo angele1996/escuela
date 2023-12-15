@@ -1,0 +1,108 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Préstamo Masivo{% endblock %}
+
+{% block body %}
+<div class="row">
+
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"></h3>
+            </div>
+            <div class="card-body">
+                {{ form_start(formEjemplar) }}
+                    <span class="help-block">{{ form_errors(formEjemplar) }}</span>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            {{ form_label(formEjemplar.codigo) }}
+                        </div>
+                        <div class="col-sm-3">
+                            {{ form_widget(formEjemplar.codigo, { 'attr': {'class': 'form-control'} }) }}
+                            <span class="invalid">{{ form_errors(formEjemplar.codigo) }}</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="submit" class="btn btn-primary">Prestar</button>
+                        </div>
+                    </div>
+                {{ form_end(formEjemplar) }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                <p>Curso Seleccionado: {{ curso }}</p>
+                {% if persona %}
+                <p>Alumno Seleccionado: {{ persona }}</p>
+                <p>Prestamos:
+                <table>
+                    {% set i = 0 %}
+                    {% for prestamo in persona.prestamos %}
+                        {% if not prestamo.esDevuelto %}
+                            {% set i = i + 1 %}
+                            <tr>
+                                <td><a href="{{ path('biblioteca-prestamo-curso-devolver', { prestamo: prestamo.id }) }}" class="btn btn-block btn-success">Devolver</a></td>
+                                <td>{{ prestamo.ejemplar }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    {% if i == 0 %}
+                        <tr><td>No hay prestamos</td></tr>
+                    {% endif %}
+                </table>
+                </p>
+                {% endif %}
+                </h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Credencial</th>
+                            <th>Préstamos</th>
+                        </tr>   
+                    </thead>
+                    <tbody>
+                    {% set i = 0 %}
+                    {% for persona in lista %}
+                        {% set i = i + 1 %}
+                        <tr>
+                            <td>{{ i }}</td>
+                            <td>{{ persona.nombres }}</td>
+                            <td>{{ persona.apellidos }}</td>
+                            <td>{{ persona.credencial }}
+                            <a href="{{ path('biblioteca-prestamo-seleccionar-persona', { persona: persona.id }) }}" class="btn btn-block btn-success">Seleccionar</a>
+                            </td>
+                            <td>
+                                <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                                {% for prestamo in persona.prestamos %}
+                                    {% if not prestamo.esDevuelto %}
+                                        <tr><td>{{ prestamo.ejemplar }}</td></tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </table>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $('#biblioteca_ejemplar_codigo').focus();
+        });    
+    </script>
+{% endblock %}

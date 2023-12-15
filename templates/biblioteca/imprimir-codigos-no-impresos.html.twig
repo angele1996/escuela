@@ -1,0 +1,20 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Biblioteca: Imprimir Códigos{% endblock %}
+
+{% block body %}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Imprimir Códigos No Impresos</h2>
+            </div>
+            <div class="card-body">
+            <p>Se ha preparado PDF con el codigo de barra de {{ lista|length }} ejemplares.</p>
+            <p>Descargue el PDF y verifique si los codigos han sido bien generados</p>
+            <p>Una vez descargado el PDF correctamente, presione el botón "Códigos bien generados"</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ path('biblioteca-imprimir-codigos-no-impresos-pdf', { ahora: ahora|date('Y-m-d H:i:s') }) }}" class="btn btn-success" target="_new">Descargar PDF</a>
+                <a href="{{ path('biblioteca-imprimir-codigos-no-impresos-ok', { ahora: ahora|date('Y-m-d H:i:s') }) }}" class="btn btn-success">Códigos bien generados</a>
+            </div>
+        </div>
+{% endblock %}

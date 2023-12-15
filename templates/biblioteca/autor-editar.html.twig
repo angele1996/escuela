@@ -1,0 +1,29 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Biblioteca{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Modificar Autor</h3>
+            </div>
+            <div class="card-body">
+                <span class="help-block">{{ form_errors(form) }}</span>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {{ form_label(form.nombre) }}
+                            {{ form_widget(form.nombre, { 'attr': {'class': 'form-control'} }) }}
+                            <span class="invalid">{{ form_errors(form.nombre) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{{ path('biblioteca-autor-index') }}" class="btn btn-danger">Cancelar</a>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
